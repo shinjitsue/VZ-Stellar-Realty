@@ -8,12 +8,14 @@
     </div>
     <div class="overlay">
       <div class="content mt-5">
-        <h1 class="pt-5 mt-5 pe-5">
-          Experience the joy <br />
-          of finding your perfect
-          <br />home.
+        <h1 class="intro pt-5 mt-5 pe-5">
+          Experience the joy of<br />
+          finding your perfect home<br />
+          here in Butuan.
         </h1>
-        <router-link to="/login" class="btn btn-primary">Login</router-link>
+        <router-link to="/login" class="btn btn-outline-light btn-lg mt-2"
+          >Get Started</router-link
+        >
       </div>
     </div>
   </div>
@@ -24,25 +26,9 @@ export default {
   name: "Index",
   data() {
     return {
-      videoUrl: "",
+      videoUrl:
+        "https://sqgjbbugvuoetuwzfzfg.supabase.co/storage/v1/object/public/video/public/BUTUAN_Cinematic_Video.mp4",
     };
-  },
-  async mounted() {
-    await this.fetchVideoUrl();
-  },
-  methods: {
-    async fetchVideoUrl() {
-      const { data, error } = await this.$supabase
-        .from("videos")
-        .select("url")
-        .eq("id", 1)
-        .single();
-      if (error) {
-        console.error(error);
-      } else {
-        this.videoUrl = data.url;
-      }
-    },
   },
 };
 </script>
@@ -61,7 +47,7 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
 .overlay {
@@ -78,6 +64,15 @@ export default {
 
 .content {
   color: white;
+}
+
+.content h1 {
+  font-family: "Raleway", sans-serif;
+}
+
+.intro {
+  font-size: 40px;
+  font-weight: 700;
 }
 
 .btn-primary {
