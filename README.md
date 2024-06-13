@@ -1,4 +1,4 @@
-# real-estate-brokerage
+# Real Estate Brokerage Listing Management System
 
 This template should help get you started developing with Vue 3 in Vite.
 
