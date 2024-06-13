@@ -1,0 +1,24 @@
+{
+  "name": "real-estate-brokerage",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "@supabase/supabase-js": "^2.43.4",
+    "bootstrap": "^5.3.3",
+    "popper.js": "^1.16.1",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "sass": "^1.77.5",
+    "vite": "^5.2.8"
+  }
+}
