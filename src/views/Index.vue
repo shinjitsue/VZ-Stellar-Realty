@@ -9,8 +9,10 @@
     <div class="overlay">
       <div class="content mt-5 text-center text-lg-start">
         <h1 class="intro pt-5 mt-5">
-          Experience the joy of<br />
-          finding your <span>perfect home</span><br />
+          Experience <br class="d-lg-none d-md-none" />the joy of<br />
+          finding your <br class="d-lg-none d-md-none" /><span
+            >perfect home</span
+          ><br />
           here in Butuan.
         </h1>
         <button @click="navigateToLogin" class="mt-2 mx-auto mx-lg-0">
