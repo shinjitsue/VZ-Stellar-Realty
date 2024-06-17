@@ -19,6 +19,7 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@rollup/plugin-alias": "^5.1.0",
     "@vitejs/plugin-vue": "^5.0.4",
     "sass": "^1.77.5",
     "vite": "^5.2.8"
