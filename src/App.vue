@@ -9,16 +9,15 @@
 
 <script>
 import Header from "./components/Header.vue";
+import { mapState } from "vuex";
 
 export default {
   name: "App",
   components: {
     Header,
   },
-  data() {
-    return {
-      isLoggedIn: false, // change this to true when the user logs in
-    };
+  computed: {
+    ...mapState(["isLoggedIn"]),
   },
 };
 </script>

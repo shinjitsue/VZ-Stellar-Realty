@@ -10,12 +10,12 @@
       class="container-fluid d-flex justify-content-center align-items-center"
     >
       <div class="container">
-        <div class="row mx-5">
+        <div class="row">
           <div
-            class="col-7 form-right d-flex justify-content-center align-items-center"
+            class="col-lg-7 col-md-7 form-right d-none d-md-flex justify-content-center align-items-center"
           >
             <div class="container">
-              <div class="px-5 color-heading">
+              <div class="px-5 my-5 color-heading">
                 <h3>Welcome.</h3>
                 <small class="mt-3">
                   Discover and manage properties with ease. Our platform
@@ -26,7 +26,11 @@
               </div>
             </div>
           </div>
-          <form @submit.prevent="login" class="col p-5 form-left" id="login">
+          <form
+            @submit.prevent="login"
+            class="col-lg-5 col-md-5 p-5 form-left rounded-lg rounded-md-0"
+            id="login"
+          >
             <div class="text-center pb-3">
               <img src="../assets/logo.png" alt="" />
             </div>
@@ -73,7 +77,7 @@
                   class="spinner-grow spinner-grow-sm"
                   aria-hidden="true"
                 ></span>
-                <span role="status">Loading...</span>
+                <span role="status"> Loading...</span>
               </button>
             </div>
             <div class="signup text-center fw-light">
@@ -107,14 +111,16 @@ export default {
     async login() {
       this.isLoading = true;
 
-      let { data, error } = await supabase.auth.signInWithPassword({
-        email: this.email,
-        password: this.password,
-      });
+      try {
+        let { data, error } = await supabase.auth.signInWithPassword({
+          email: this.email,
+          password: this.password,
+        });
 
-      if (error) {
-        this.$toastr.error("Invalid email or password. Please try again.");
-      } else {
+        if (error) {
+          throw new Error("Invalid email or password. Please try again.");
+        }
+
         let session = data.session;
         let user = data.user;
 
@@ -134,23 +140,21 @@ export default {
           } else {
             console.log("No user info found for this user");
           }
+
+          // if the user is logged in, set the isLoggedIn state to true
+          this.$store.commit("setLoggedIn", true);
         }
         this.$toastr.success("Login successful!");
 
-        // Wait for 2 seconds then redirect to home page
-        setTimeout(() => {
-          this.$router.push({ name: "Home" });
-        }, 5000);
-      }
-
-      // Wait for 5 seconds then stop the loading spinner
-      setTimeout(() => {
+        // Redirect to home page
+        this.$router.push({ name: "home" });
+      } catch (error) {
+        this.$toastr.error(error.message);
+      } finally {
         this.isLoading = false;
-      }, 5000);
-
-      this.isLoading = false;
-      this.email = "";
-      this.password = "";
+        this.email = "";
+        this.password = "";
+      }
     },
   },
 };
@@ -170,7 +174,7 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: translate(-50%, -50%) scale(1.2);
+  transform: translate(-50%, -50%) scale(1.3);
 }
 
 .container-fluid {
@@ -188,11 +192,8 @@ export default {
 
 .form-left {
   /* From https://css.glass */
-
-  border-radius: 0px 16px 16px 0px;
-
+  border-radius: 16px;
   background: rgba(255, 255, 255, 0.4);
-
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(7.5px);
   -webkit-backdrop-filter: blur(7.5px);
@@ -304,5 +305,12 @@ button:active {
   -webkit-transition: box-shadow 0.2s ease-in;
   -moz-transition: box-shadow 0.2s ease-in;
   transition: box-shadow 0.2s ease-in;
+}
+
+/* Add media query for larger screens */
+@media (min-width: 768px) {
+  .form-left {
+    border-radius: 0 16px 16px 0;
+  }
 }
 </style>

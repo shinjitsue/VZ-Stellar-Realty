@@ -5,9 +5,4 @@
   </div>
 </template>
 
-<style scoped>
-h1 {
-  color: #2c3e50;
-  margin-bottom: 20px;
-}
-</style>
+<style scoped></style>

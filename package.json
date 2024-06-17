@@ -16,7 +16,8 @@
     "toastr": "^2.1.4",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^5.1.0",

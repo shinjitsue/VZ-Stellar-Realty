@@ -7,13 +7,15 @@
       </video>
     </div>
     <div class="overlay">
-      <div class="content mt-5">
-        <h1 class="intro pt-5 mt-5 pe-5">
+      <div class="content mt-5 text-center text-lg-start">
+        <h1 class="intro pt-5 mt-5">
           Experience the joy of<br />
           finding your <span>perfect home</span><br />
           here in Butuan.
         </h1>
-        <button @click="navigateToLogin" class="mt-2">Get Started</button>
+        <button @click="navigateToLogin" class="mt-2 mx-auto mx-lg-0">
+          Get Started
+        </button>
       </div>
     </div>
   </div>
@@ -50,7 +52,7 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: translate(-50%, -50%) scale(1.2);
+  transform: translate(-50%, -50%) scale(1.3);
 }
 
 .overlay {
@@ -161,4 +163,13 @@ button:active {
   -moz-transition: box-shadow 0.2s ease-in;
   transition: box-shadow 0.2s ease-in;
 }
+
+/* @media (max-width: 768px) {
+  .intro {
+    font-size: 24px;
+  }
+  .intro span {
+    font-size: 24px;
+  }
+} */
 </style>
