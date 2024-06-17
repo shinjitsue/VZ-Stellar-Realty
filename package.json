@@ -13,8 +13,10 @@
     "@supabase/supabase-js": "^2.43.4",
     "bootstrap": "^5.3.3",
     "popper.js": "^1.16.1",
+    "toastr": "^2.1.4",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
