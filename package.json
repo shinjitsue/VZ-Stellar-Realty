@@ -12,6 +12,7 @@
     "@popperjs/core": "^2.11.8",
     "@supabase/supabase-js": "^2.43.4",
     "bootstrap": "^5.3.3",
+    "mdb-vue-ui-kit": "^5.0.0",
     "popper.js": "^1.16.1",
     "toastr": "^2.1.4",
     "vue": "^3.4.21",

@@ -1,11 +1,6 @@
 <template>
   <div class="login-page">
-    <div class="video-container" v-if="videoUrl">
-      <video autoplay muted loop>
-        <source :src="videoUrl" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    </div>
+    <VideoBackground :videoUrl="videoUrl" />
     <div
       class="container-fluid d-flex justify-content-center align-items-center"
     >
@@ -95,9 +90,13 @@
 
 <script>
 import { supabase } from "../../src/services/supabase";
+import VideoBackground from "@/components/VideoBackground.vue";
 
 export default {
   name: "Login",
+  components: {
+    VideoBackground,
+  },
   data() {
     return {
       videoUrl:

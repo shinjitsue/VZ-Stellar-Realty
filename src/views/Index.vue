@@ -1,11 +1,6 @@
 <template>
   <div class="index-page">
-    <div class="video-container" v-if="videoUrl">
-      <video autoplay muted loop>
-        <source :src="videoUrl" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    </div>
+    <VideoBackground :videoUrl="videoUrl" />
     <div class="overlay">
       <div class="content mt-5 text-center text-lg-start">
         <h1 class="intro pt-5 mt-5">
@@ -24,8 +19,13 @@
 </template>
 
 <script>
+import VideoBackground from "@/components/VideoBackground.vue";
+
 export default {
   name: "Index",
+  components: {
+    VideoBackground,
+  },
   data() {
     return {
       videoUrl:
@@ -45,16 +45,6 @@ export default {
   position: relative;
   height: 100vh;
   overflow: hidden;
-}
-
-.video-container video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: translate(-50%, -50%) scale(1.3);
 }
 
 .overlay {
@@ -165,13 +155,4 @@ button:active {
   -moz-transition: box-shadow 0.2s ease-in;
   transition: box-shadow 0.2s ease-in;
 }
-
-/* @media (max-width: 768px) {
-  .intro {
-    font-size: 24px;
-  }
-  .intro span {
-    font-size: 24px;
-  }
-} */
 </style>
