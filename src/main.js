@@ -4,6 +4,7 @@ import router from "./router";
 import "bootstrap/dist/css/bootstrap.css";
 import "./assets/main.css";
 import "bootstrap/dist/js/bootstrap.js";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "popper.js";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";

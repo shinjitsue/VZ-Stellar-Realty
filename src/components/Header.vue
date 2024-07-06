@@ -116,13 +116,26 @@ export default {
   display: none;
 }
 
-/* Active navbar item styles */
 .nav-link.active {
   font-weight: bolder;
-  color: #dfad03 !important; /* Change the color */
+  color: #dfad03 !important;
 }
 
 .nav-link:hover {
   color: #dfad03;
+}
+
+.nav-item {
+  align-items: center;
+}
+
+.navbar-nav {
+  align-items: center;
+}
+
+@media (max-width: 991px) {
+  .offcanvas-body .navbar-nav {
+    align-items: flex-start;
+  }
 }
 </style>
