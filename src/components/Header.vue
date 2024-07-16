@@ -1,16 +1,18 @@
 <template>
   <header>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+    <nav
+      class="navbar navbar-expand-lg bg-body-tertiary border-bottom fixed-top"
+    >
       <div class="container">
-        <a class="navbar-brand" href="#">
+        <router-link to="/home" class="navbar-brand">
           <img
             src="../assets/logo-nav.png"
             alt="Logo"
             width="130"
-            height="38"
+            height="36"
             class="d-inline-block align-text-top"
           />
-        </a>
+        </router-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -44,16 +46,39 @@
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item me-3">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a
+                  class="nav-link"
+                  :class="{ active: activeSection === 'home' }"
+                  href="#home"
+                  @click.prevent="setActiveSection('home', $event)"
+                  >Home</a
+                >
               </li>
               <li class="nav-item me-3">
-                <a class="nav-link" href="#">Popular</a>
+                <a
+                  class="nav-link"
+                  :class="{ active: activeSection === 'popular' }"
+                  href="#popular"
+                  @click.prevent="setActiveSection('popular', $event)"
+                  >Popular</a
+                >
               </li>
               <li class="nav-item me-3">
-                <a class="nav-link" href="#">Listings</a>
+                <a
+                  class="nav-link"
+                  :class="{ active: activeSection === 'listings' }"
+                  href="#listings"
+                  @click.prevent="setActiveSection('listings', $event)"
+                  >Listings</a
+                >
               </li>
               <li class="nav-item me-3">
-                <a class="nav-link" href="#">About</a>
+                <a
+                  class="nav-link"
+                  href="#about"
+                  @click.prevent="setActiveSection('about')"
+                  >About</a
+                >
               </li>
             </ul>
             <ul class="navbar-nav ms-auto">
@@ -97,6 +122,60 @@
 <script>
 export default {
   name: "Header",
+  props: {
+    currentSection: {
+      type: String,
+      default: "home",
+    },
+  },
+  data() {
+    return {
+      activeSection: this.currentSection, // Default active section
+    };
+  },
+  watch: {
+    currentSection(newSection) {
+      this.activeSection = newSection;
+    },
+  },
+  methods: {
+    setActiveSection(section, event) {
+      if (event) event.preventDefault();
+      this.activeSection = section;
+      this.$emit("section-changed", section);
+      const sectionElement = document.getElementById(section);
+      if (sectionElement) {
+        sectionElement.scrollIntoView({ behavior: "smooth" });
+      }
+    },
+    handleScroll() {
+      // Define your sections IDs here
+      const sections = ["home", "popular", "listings"]; // Example section IDs
+      let currentSection = this.activeSection;
+
+      for (let section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const bounding = element.getBoundingClientRect();
+          if (bounding.top >= 0 && bounding.top <= window.innerHeight / 2) {
+            currentSection = section;
+            break; // Stop the loop once the current section is found
+          }
+        }
+      }
+
+      if (this.activeSection !== currentSection) {
+        this.activeSection = currentSection;
+        this.$emit("section-changed", currentSection);
+      }
+    },
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
 };
 </script>
 
