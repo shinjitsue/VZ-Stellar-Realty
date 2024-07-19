@@ -120,7 +120,7 @@ export default {
 }
 
 .search-box input:focus {
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.334);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.157);
 }
 
 .bi.bi-search {

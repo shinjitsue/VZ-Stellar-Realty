@@ -1,5 +1,5 @@
 <template>
-  <di>
+  <div>
     <!-- Home Section -->
     <div id="home">
       <!-- Home Intro 1 -->
@@ -46,96 +46,41 @@
     <div class="container-fluid">
       <div class="container" id="popular">
         <div class="row my-5 py-3">
-          <h3 class="mb-4 pb-2 col-12 px-0">Popular Property</h3>
+          <h3 class="mb-4 pb-2 col-12 px-0">Popular Properties</h3>
           <!-- Swiper -->
           <swiper
             :slidesPerView="3"
             :spaceBetween="30"
-            :pagination="{
-              clickable: true,
-            }"
+            :pagination="{ clickable: true }"
             :modules="modules"
             class="mySwiper col-12"
             :breakpoints="{
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 10,
-              },
-              768: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 30,
-              },
+              320: { slidesPerView: 1, spaceBetween: 10 },
+              768: { slidesPerView: 2, spaceBetween: 20 },
+              1024: { slidesPerView: 3, spaceBetween: 30 },
             }"
           >
-            <swiper-slide class="swiper-slide">
+            <!-- Loop through each property and create a swiper-slide for each -->
+            <swiper-slide
+              v-for="property in popularProperties"
+              :key="property.id"
+              class="swiper-slide"
+            >
               <div class="card pCard" style="width: 100%">
                 <img
-                  src="../assets/intro2.jpg"
+                  v-if="property.images && property.images.length > 0"
+                  :src="property.images[0].fullUrl"
                   class="card-img-top"
                   alt="Property Image"
                 />
-                <div class="card-body">
-                  <span>Apartment • Lot: 21665 sqm</span> <br />
-                  <h4 class="pt-1">₱250,000,000</h4>
-                  <p class="text-secondary m-0 pb-1">
-                    7 Bed | 7 Bath | For Rent
+                <div class="card-body text-truncate">
+                  <span>{{ property.type }} • {{ property.status }}</span>
+                  <br />
+                  <h3 class="pt-1">₱{{ formatPrice(property.price) }}</h3>
+                  <p class="text-secondary m-0 pb-1" v-if="property.lot_size">
+                    Lot: {{ property.lot_size }} sqm
                   </p>
-                  <small>Muntinlupa, Metro Manila</small>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide class="swiper-slide">
-              <div class="card pCard" style="width: 100%">
-                <img
-                  src="../assets/intro2.jpg"
-                  class="card-img-top"
-                  alt="Property Image"
-                />
-                <div class="card-body">
-                  <span>Apartment • Lot: 21665 sqm</span> <br />
-                  <h4 class="pt-1">₱250,000,000</h4>
-                  <p class="text-secondary m-0 pb-1">
-                    7 Bed | 7 Bath | For Rent
-                  </p>
-                  <small>Muntinlupa, Metro Manila</small>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide class="swiper-slide">
-              <div class="card pCard" style="width: 100%">
-                <img
-                  src="../assets/intro2.jpg"
-                  class="card-img-top"
-                  alt="Property Image"
-                />
-                <div class="card-body">
-                  <span>Apartment • Lot: 21665 sqm</span> <br />
-                  <h4 class="pt-1">₱250,000,000</h4>
-                  <p class="text-secondary m-0 pb-1">
-                    7 Bed | 7 Bath | For Rent
-                  </p>
-                  <small>Muntinlupa, Metro Manila</small>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide class="swiper-slide">
-              <div class="card pCard" style="width: 100%">
-                <img
-                  src="../assets/intro2.jpg"
-                  class="card-img-top"
-                  alt="Property Image"
-                />
-                <div class="card-body">
-                  <span>Apartment • Lot: 21665 sqm</span> <br />
-                  <h4 class="pt-1">₱250,000,000</h4>
-                  <p class="text-secondary m-0 pb-1">
-                    7 Bed | 7 Bath | For Rent
-                  </p>
-                  <small>Muntinlupa, Metro Manila</small>
+                  <small class="text-truncate">{{ property.location }}</small>
                 </div>
               </div>
             </swiper-slide>
@@ -150,126 +95,26 @@
       <div class="container" id="listings">
         <h3 class="mb-4 pb-2 col-12">Recently Posted Listings</h3>
         <div class="row">
-          <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-4 mb-sm-4">
+          <div
+            class="col-lg-3 col-md-6 col-12 mb-4 mb-md-4 mb-sm-4"
+            v-for="property in listingProperties"
+            :key="property.id"
+          >
             <div class="card lCard">
               <img
-                src="../assets/intro2.jpg"
+                v-if="property.images && property.images.length > 0"
+                :src="property.images[0].fullUrl"
                 class="card-img-top"
                 alt="Property Image"
               />
-              <div class="card-body">
-                <span>Apartment • Lot: 21665 sqm</span> <br />
-                <h4 class="pt-1">₱250,000,000</h4>
-                <p class="text-secondary m-0 pb-1">7 Bed | 7 Bath | For Rent</p>
-                <small>Muntinlupa, Metro Manila</small>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-4 mb-sm-4">
-            <div class="card lCard">
-              <img
-                src="../assets/intro2.jpg"
-                class="card-img-top"
-                alt="Property Image"
-              />
-              <div class="card-body">
-                <span>Apartment • Lot: 21665 sqm</span> <br />
-                <h4 class="pt-1">₱250,000,000</h4>
-                <p class="text-secondary m-0 pb-1">7 Bed | 7 Bath | For Rent</p>
-                <small>Muntinlupa, Metro Manila</small>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-4 mb-sm-4">
-            <div class="card lCard">
-              <img
-                src="../assets/intro2.jpg"
-                class="card-img-top"
-                alt="Property Image"
-              />
-              <div class="card-body">
-                <span>Apartment • Lot: 21665 sqm</span> <br />
-                <h4 class="pt-1">₱250,000,000</h4>
-                <p class="text-secondary m-0 pb-1">7 Bed | 7 Bath | For Rent</p>
-                <small>Muntinlupa, Metro Manila</small>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-4 mb-sm-4">
-            <div class="card lCard">
-              <img
-                src="../assets/intro2.jpg"
-                class="card-img-top"
-                alt="Property Image"
-              />
-              <div class="card-body">
-                <span>Apartment • Lot: 21665 sqm</span> <br />
-                <h4 class="pt-1">₱250,000,000</h4>
-                <p class="text-secondary m-0 pb-1">7 Bed | 7 Bath | For Rent</p>
-                <small>Muntinlupa, Metro Manila</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-4 mb-sm-4">
-            <div class="card lCard">
-              <img
-                src="../assets/intro2.jpg"
-                class="card-img-top"
-                alt="Property Image"
-              />
-              <div class="card-body">
-                <span>Apartment • Lot: 21665 sqm</span> <br />
-                <h4 class="pt-1">₱250,000,000</h4>
-                <p class="text-secondary m-0 pb-1">7 Bed | 7 Bath | For Rent</p>
-                <small>Muntinlupa, Metro Manila</small>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-4 mb-sm-4">
-            <div class="card lCard">
-              <img
-                src="../assets/intro2.jpg"
-                class="card-img-top"
-                alt="Property Image"
-              />
-              <div class="card-body">
-                <span>Apartment • Lot: 21665 sqm</span> <br />
-                <h4 class="pt-1">₱250,000,000</h4>
-                <p class="text-secondary m-0 pb-1">7 Bed | 7 Bath | For Rent</p>
-                <small>Muntinlupa, Metro Manila</small>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-4 mb-sm-4">
-            <div class="card lCard">
-              <img
-                src="../assets/intro2.jpg"
-                class="card-img-top"
-                alt="Property Image"
-              />
-              <div class="card-body">
-                <span>Apartment • Lot: 21665 sqm</span> <br />
-                <h4 class="pt-1">₱250,000,000</h4>
-                <p class="text-secondary m-0 pb-1">7 Bed | 7 Bath | For Rent</p>
-                <small>Muntinlupa, Metro Manila</small>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-4 mb-sm-4">
-            <div class="card lCard">
-              <img
-                src="../assets/intro2.jpg"
-                class="card-img-top"
-                alt="Property Image"
-              />
-              <div class="card-body">
-                <span>Apartment • Lot: 21665 sqm</span> <br />
-                <h4 class="pt-1">₱250,000,000</h4>
-                <p class="text-secondary m-0 pb-1">7 Bed | 7 Bath | For Rent</p>
-                <small>Muntinlupa, Metro Manila</small>
+              <div class="card-body text-truncate">
+                <span>{{ property.type }} • {{ property.status }}</span>
+                <br />
+                <h3 class="pt-1">₱{{ formatPrice(property.price) }}</h3>
+                <p class="text-secondary m-0 pb-1" v-if="property.lot_size">
+                  Lot: {{ property.lot_size }} sqm
+                </p>
+                <small class="text-truncate">{{ property.location }}</small>
               </div>
             </div>
           </div>
@@ -341,7 +186,7 @@
       </div>
     </div>
     <!-- End of Search Filter Modal -->
-  </di>
+  </div>
 </template>
 
 <script>
@@ -351,6 +196,9 @@ import Footer from "@/components/Footer.vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/pagination";
+
+import { supabase, propertyImageUrl } from "../../src/services/supabase";
+import { ref, onMounted } from "vue";
 
 // import required modules
 import { FreeMode, Pagination } from "swiper/modules";
@@ -365,7 +213,77 @@ export default {
     SwiperSlide,
   },
   setup() {
+    const popularProperties = ref([]);
+    const listingProperties = ref([]);
+
+    async function fetchProperties() {
+      // Fetch for the Listings section (recent properties)
+      let { data: recent, error: recentError } = await supabase
+        .from("property")
+        .select("*")
+        .order("id", { ascending: false }); // Descending order by id
+
+      if (recentError) console.error(recentError);
+
+      // Fetch all properties to randomize for the Popular section
+      let { data: allProperties, error: allPropertiesError } = await supabase
+        .from("property")
+        .select("*");
+
+      if (allPropertiesError) console.error(allPropertiesError);
+
+      // Randomize allProperties for the Popular section and limit to 6
+      let randomizedProperties = allProperties
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 6);
+
+      // Process images for both sections
+      const processImages = async (properties) => {
+        return Promise.all(
+          properties.map(async (prop) => {
+            let { data: images, error: imagesError } = await supabase
+              .from("property_images")
+              .select("image_path")
+              .eq("property_id", prop.id);
+
+            if (imagesError) {
+              console.error(imagesError);
+              return prop; // Return property without images if error occurs
+            }
+
+            return {
+              ...prop,
+              images: images.map((img) => ({
+                ...img,
+                fullUrl: propertyImageUrl + img.image_path,
+              })),
+            };
+          })
+        );
+      };
+
+      // Process images for the Popular section
+      popularProperties.value = await processImages(randomizedProperties);
+
+      // Process images for the Listings section, then limit to 8
+      let processedRecent = await processImages(recent);
+      listingProperties.value = processedRecent.slice(0, 8); // Limit to 8 properties
+    }
+
+    onMounted(fetchProperties);
+
+    // Method to format price
+    const formatPrice = (price) => {
+      return new Intl.NumberFormat("en-US", {
+        style: "decimal",
+        maximumFractionDigits: 2,
+      }).format(price);
+    };
+
     return {
+      popularProperties,
+      listingProperties,
+      formatPrice,
       modules: [FreeMode, Pagination],
     };
   },
