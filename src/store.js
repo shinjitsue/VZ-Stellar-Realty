@@ -8,6 +8,7 @@ const store = createStore({
     refreshToken: null,
     role: null,
     isLoggedIn: false,
+    results: [],
   },
   mutations: {
     setAccessToken(state, token) {
@@ -22,6 +23,17 @@ const store = createStore({
     setLoggedIn(state, value) {
       state.isLoggedIn = value;
     },
+    setResults(state, results) {
+      state.results = results;
+    },
+  },
+  actions: {
+    updateResults({ commit }, results) {
+      commit("setResults", results);
+    },
+  },
+  getters: {
+    getResults: (state) => state.results,
   },
   plugins: [createPersistedState()],
 });

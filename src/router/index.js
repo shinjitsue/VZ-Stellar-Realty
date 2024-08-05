@@ -3,6 +3,7 @@ import store from "../store";
 import Index from "@/views/Index.vue";
 import Login from "@/views/Login.vue";
 import Home from "@/views/Home.vue";
+import Result from "@/views/Result.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,6 +24,11 @@ const router = createRouter({
       name: "home",
       component: Home,
       meta: { requiresAuth: true }, // To protect the route from unauthorized access
+    },
+    {
+      path: "/result",
+      name: "result",
+      component: Result,
     },
   ],
 });
