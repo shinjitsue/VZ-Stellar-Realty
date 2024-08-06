@@ -38,6 +38,8 @@ export default {
     },
   },
 };
+
+// “What part of the website could tell you where the creator doesn’t want you to look?”
 </script>
 
 <style scoped>
