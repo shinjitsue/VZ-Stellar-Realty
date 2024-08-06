@@ -13,7 +13,6 @@
         <button @click="navigateToLogin" class="mt-2 mx-auto mx-lg-0">
           Get Started
         </button>
-        <!-- “What part of the website could tell you where the creator doesn’t want you to look?” -->
       </div>
     </div>
   </div>
